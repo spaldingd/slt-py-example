@@ -9,6 +9,7 @@ shape classes.
 
 from shapes.rectangle import Rectangle
 from shapes.circle import Circle
+from shapes.triangle import Triangle
 
 
 def test_rectangle():
@@ -45,3 +46,36 @@ def test_circle():
     assert radius8.perimeter() == 50.27
     assert radius5.diameter() == 10
     assert radius8.diameter() == 16
+
+
+def test_triangle():
+    """
+    Defines tests on some specific triangle objects.
+    """
+    tri_9_10_11 = Triangle(9, 10, 11)
+    tri_10_10_10 = Triangle(10, 10, 10)
+    tri_15_20_15 = Triangle(15, 20, 15)
+
+    assert tri_9_10_11.area() == 42.43
+    assert tri_10_10_10.area() == 43.30
+    assert tri_15_20_15.area() == 111.80
+
+    assert tri_9_10_11.perimeter() == 30
+    assert tri_10_10_10.perimeter() == 30
+    assert tri_15_20_15.perimeter() == 50
+
+    assert tri_9_10_11.height() == 8.49
+    assert tri_10_10_10.height() == 8.66
+    assert tri_15_20_15.height() == 11.18
+
+    assert tri_9_10_11.is_equilateral() == False
+    assert tri_10_10_10.is_equilateral() == True
+    assert tri_15_20_15.is_equilateral() == False
+
+    assert tri_9_10_11.is_isosceles() == False
+    assert tri_10_10_10.is_isosceles() == False
+    assert tri_15_20_15.is_isosceles() == True
+
+    assert tri_9_10_11.is_scalene() == True
+    assert tri_10_10_10.is_scalene() == False
+    assert tri_15_20_15.is_scalene() == False
