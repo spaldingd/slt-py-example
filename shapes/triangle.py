@@ -36,13 +36,24 @@ class Triangle(Shape):
         else:
             raise ValueError("'c' value must be provided.")
 
+        if self.is_isosceles():
+            if not self.is_valid_isosceles():
+                raise ValueError("Isosceles triangle is not valid. Sides 'A' and 'C' must be equal and larger than "
+                                 "'0.5 * Base'")
+
     def area(self):
         """
         Compute the area of the triangle using Heron's formular.
         """
         s = (self.a + self.b + self.c) / 2
-
-        return round((s * (s - self.a) * (s - self.b) * (s - self.c)) ** 0.5, self.decimal_places)
+        if self.is_isosceles():
+            if self.is_valid_isosceles():
+                return round((s * ((s - self.a) ** 2) * (s - self.b)) ** 0.5, self.decimal_places)
+            else:
+                raise ValueError("Isosceles triangle is not valid. Sides 'A' and 'C' must be equal and larger than "
+                                 "'0.5 * Base'")
+        else:
+            return round((s * (s - self.a) * (s - self.b) * (s - self.c)) ** 0.5, self.decimal_places)
 
     def perimeter(self):
         """
@@ -55,3 +66,15 @@ class Triangle(Shape):
         Compute the height of a triangle using the formular A = 1/2 * B * H.
         """
         return round(self.area() / (0.5 * self.b), self.decimal_places)
+
+    def is_equilateral(self):
+        return True if self.a == self.b == self.c else False
+
+    def is_isosceles(self):
+        return True if not self.is_equilateral() and self.a == self.c else False
+
+    def is_scalene(self):
+        return True if self.a != self.b and self.a != self.c else False
+
+    def is_valid_isosceles(self):
+        return True if (self.a > (0.5 * self.b)) and (self.c > (0.5 * self.b)) else False
