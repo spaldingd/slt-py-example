@@ -70,4 +70,3 @@ class TriangleTest(TestCase):
         self.assertTrue(self.sides_9_10_11.is_scalene())
         self.assertFalse(self.sides_10_10_10.is_scalene())
         self.assertFalse(self.sides_15_20_15.is_scalene())
-
