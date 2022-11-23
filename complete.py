@@ -129,16 +129,9 @@ def get_triangles(filename):
             print(error)
             raise
 
-    # Manually iterate over the JSON dictionaries in the list
-    # of triangles. Create a new Triangle object for each one
-    # and add it to the list.
-    triangle_objects = []
-    for tria in data["triangle_list"]:
-        a = tria["a"]
-        b = tria["b"]
-        c = tria["c"]
-        new_triangle = Triangle(a, b, c)
-        triangle_objects.append(new_triangle)
+    # Use a list comprehension to create a new Triangle
+    # object for each side integer found in the triangle_list.
+    triangle_objects = [Triangle(a, b, c) for a, b, c in data["triangle_list"]]
 
     # Return the list of Triangle objects
     return triangle_objects
